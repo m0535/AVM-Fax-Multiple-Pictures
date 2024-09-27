@@ -1,7 +1,7 @@
 # AVM-Fax-Multiple-Pictures
 Tampermonkey User Script
 
-Download the Browser Addon an import the user script.
+Download the Browser Addon and import the user script.
 
 The Script will add the multiple attribute to the Fritz!Box Fax Send page.
 
