@@ -12,60 +12,60 @@
 (function() {
     'use strict';
 
-    // Funktion, um einen Zeitstempel zu erstellen
+    // Funttion, create timestamp
     function logWithTimestamp(message) {
-        const timestamp = new Date().toLocaleString(); // Holt das aktuelle Datum und die Uhrzeit
+        const timestamp = new Date().toLocaleString(); // get date and time
         console.log(`[${timestamp}] ${message}`);
     }
 
-    // Funktion, die das "multiple"-Attribut hinzufügt
+    // function, add the "multiple"-Attribut
     function addMultipleAttribute() {
         var fileInput = document.getElementById("uiFile");
 
         if (fileInput) {
-            // Prüfe, ob das "multiple" Attribut bereits gesetzt ist
+            // check, if the "multiple" Attribut exists
             if (!fileInput.hasAttribute("multiple")) {
                 fileInput.setAttribute("multiple", "multiple");
-                logWithTimestamp("Attribut 'multiple' hinzugefügt!");
+                logWithTimestamp("Attribut 'multiple' added!");
             } else {
-                logWithTimestamp("Attribut 'multiple' bereits vorhanden.");
+                logWithTimestamp("Attribut 'multiple' exists.");
             }
         } else {
-            logWithTimestamp("Input-Element nicht gefunden.");
+            logWithTimestamp("Input-Element not found.");
         }
     }
 
-    // Funktion, um Änderungen im DOM zu überwachen
+    // function, track DOM changes
     function observeDOMChanges() {
-        // Wähle das Element, dessen Änderungen beobachtet werden sollen
+        // select the attribute to track
         var targetNode = document.body;
 
-        // Konfiguriere den Observer: Wir beobachten Änderungen an Kindknoten und an der Struktur
+        // configure the bbserver: track child objects
         var config = { childList: true, subtree: true };
 
-        // Callback-Funktion, die bei DOM-Änderungen ausgeführt wird
+        // callback-function, run by DOM-changes
         var callback = function(mutationsList, observer) {
             for (var mutation of mutationsList) {
                 if (mutation.type === 'childList') {
-                    logWithTimestamp("DOM hat sich geändert. Versuche, das Attribut 'multiple' hinzuzufügen.");
+                    logWithTimestamp("DOM change. try, to add the Attribut 'multiple'.");
                     addMultipleAttribute(); // Versuche erneut, das Attribut hinzuzufügen
                 }
             }
         };
 
-        // Erstelle einen MutationObserver und starte ihn
+        // create and run a mutation observer
         var observer = new MutationObserver(callback);
         observer.observe(targetNode, config);
     }
 
-    // Initialisiere das Skript, wenn die Seite geladen ist
+    // init script, if the page will loaded
     window.onload = function() {
-        logWithTimestamp("Seite geladen. Starte Skript.");
+        logWithTimestamp("Page loaded. Start Script.");
 
-        // Füge das "multiple"-Attribut beim ersten Laden hinzu
+        // add the "multiple"-Attribut
         addMultipleAttribute();
 
-        // Beobachte DOM-Änderungen
+        // watch the DOM-changes
         observeDOMChanges();
     };
 
